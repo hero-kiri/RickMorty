@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Characters</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Characters</h1>
+        <div class="row g-4">
+            {% for character in characters %}
+            <div class="col-md-4 col-lg-3">
+                <div class="card shadow-sm">
+                    <img src="{{ character.image }}" class="card-img-top" alt="{{ character.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ character.name }}</h5>
+                        <p class="card-text">
+                            <strong>Status:</strong> {{ character.status }}<br>
+                            <strong>Species:</strong> {{ character.species }}<br>
+                            <strong>Type:</strong> {{ character.type }}<br>
+                            <strong>Gender:</strong> {{ character.gender }}
+                        </p>
+                        <a href="{% url 'detail' character.id %}" class="btn btn-primary btn-sm">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+       
+        <!-- Пагинация -->
+        <div class="d-flex justify-content-between align-items-center mt-4">
+            {% if previous_page %}
+            <a href="?page={{ previous_page }}" class="btn btn-primary">Previous</a>
+            {% else %}
+            <span class="btn btn-secondary disabled">Previous</span>
+            {% endif %}
+
+            <span>Page {{ current_page }}</span>
+
+            {% if next_page %}
+            <a href="?page={{ next_page }}" class="btn btn-primary">Next</a>
+            {% else %}
+            <span class="btn btn-secondary disabled">Next</span>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
